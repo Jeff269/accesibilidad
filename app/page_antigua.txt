@@ -1,0 +1,399 @@
+import { Article } from '@/components/Article';
+import { SubSection } from '@/components/SubSection';
+import Image from 'next/image';
+import Talker from '../components/Talker';
+import Panel from '../components/PanelCommon';
+
+
+
+function createPanel(backgroundColor, title, buttonText, position, defaultTexts, panelSize, imageUrl, buttonColor, iconSvg) {
+  const panelStyle = {
+    backgroundColor,
+    width: panelSize.width,
+    height: panelSize.height,
+    display: 'flex',
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    marginBottom: '10px',
+  };
+
+  if (position === 'right') {
+    panelStyle.marginRight = '10px';
+    panelStyle.marginLeft = '10px';
+  } else {
+    panelStyle.marginLeft = '400px'; // Ajusta el margen izquierdo
+  }
+
+  const renderDefaultTexts = () => {
+    return defaultTexts.map((text, index) => (
+      <div key={index} style={{ width: '100%', border: '1px solid black', margin: '5px' }}>
+        <div contentEditable="true">{text}</div>
+      </div>
+    ));
+  };
+
+  const buttonStyle = {
+    backgroundColor: buttonColor || backgroundColor,
+    color: 'black',
+    padding: '10px 20px',
+    fontSize: '16px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginRight: position === 'right' ? '0' : '10px',
+    marginLeft: position === 'left' ? '0' : '10px',
+  };
+
+  return (
+    <div style={panelStyle}>
+      {iconSvg && <div dangerouslySetInnerHTML={{ __html: iconSvg }} />} {/* Renderiza el SVG en la parte superior */}
+      {imageUrl && <img src={imageUrl} alt={`Panel ${title}`} style={{ width: '100px', height: '100px' }} />}
+      <Talker>
+        <h1 className='uppercase font-bold text-1xl text-gray-950 border-b-4 my-2'>
+          {title}
+        </h1>
+      </Talker>
+      <Talker>
+        <button style={buttonStyle}>{buttonText}</button>
+      </Talker>
+      {renderDefaultTexts()}
+    </div>
+  );
+}
+
+
+
+
+export default function Home() {
+  return (
+    <>
+      <Article
+        title={'BIENVENIDOS'}
+        resume={'Resumenasdjkasdkasdhashuipasdhuiasdhioasuhasduioasuiodhaiosuhdasuiodhasuiohasduio'}
+      >
+        <SubSection
+          subtitle={'ANUNCIOS'}
+          resume={'loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem'}
+        >
+          <div style={{ textAlign: 'center', position: 'relative' }}>
+            <Image
+              src="/bannertrabajo.jpeg"
+              alt="Banner de Trabajo"
+              width={600}
+              height={400}
+              style={{
+                display: 'block',
+                margin: '0 auto',
+              }}
+            />
+
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+              <Talker>
+                <button
+                  style={{
+                    backgroundColor: '#FF5733', 
+                    color: 'black',
+                    padding: '10px 20px',
+                    fontSize: '16px',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  REGISTRATE
+                </button>
+              </Talker>
+
+            </div>
+          </div>
+        </SubSection>
+
+        <SubSection>
+  {/* Contenedor de los paneles */}
+  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+    {[
+      {
+        backgroundColor: '#e0faec', 
+        title: 'CARRERAS PROFESIONALES',
+        buttonText: 'Conoce más',
+        defaultTexts: [],
+        panelSize: { width: '150px', height: '150px' },
+        position: 'right',
+        buttonColor: '#00d664', 
+        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>',
+      },
+
+      
+
+      {
+        backgroundColor: '#e0faec', 
+        title: 'BOLSA LABORAL UNCP',
+        buttonText: 'Conoce más',
+        defaultTexts: [],
+        panelSize: { width: '150px', height: '150px' },
+        position: 'right',
+        buttonColor: '#00d664', 
+        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" /></svg>'
+      },
+      {
+        backgroundColor: '#e0faec', 
+        title: 'INVESTIGACION',
+        buttonText: 'Registrate',
+        defaultTexts: [],
+        panelSize: { width: '150px', height: '150px' },
+        position: 'right',
+        buttonColor: '#00d664', 
+        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>'
+      },
+      {
+        backgroundColor: '#e0faec', 
+        title: 'ADMISION UNCP',
+        buttonText: 'Conoce más',
+        defaultTexts: [],
+        panelSize: { width: '150px', height: '150px' },
+        position: 'right',
+        buttonColor: '#00d664', 
+        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>'
+      },
+      {
+        backgroundColor: '#e0faec', 
+        title: 'LOGISTICA',
+        buttonText: 'Registrate',
+        defaultTexts: [],
+        panelSize: { width: '150px', height: '150px' },
+        position: 'right',
+        buttonColor: '#00d664', 
+        iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'
+      },
+      
+    ].map((panel, index) => (
+      <div key={index} style={{ marginRight: '0px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {createPanel(
+          panel.backgroundColor,
+          panel.title,
+          panel.buttonText,
+          panel.position,
+          panel.defaultTexts,
+          panel.panelSize,
+          null, //  una URL de imagen
+          panel.buttonColor, 
+          panel.iconSvg 
+        )}
+      </div>
+    ))}
+  </div>
+</SubSection>
+
+      <SubSection subtitle={'Te ofrecemos nuestros servicios'} resume={''}>
+  {/* Paneles */}
+  {[
+    {
+      backgroundColor: '#047df4',
+      title: 'GESDOC - ADMINISTRATIVO',
+      buttonText: 'Ver más',
+      defaultTexts: [],
+      panelSize: { width: '500px', height: '250px' },
+      position: 'right',
+      imageSrc: '/panel1.jpg', 
+    },
+    {
+      backgroundColor: '#ffffff',
+      title: 'Sistema Galileo',
+      buttonText: 'Ver más',
+      defaultTexts: [],
+      panelSize: { width: '500px', height: '250px' },
+      position: 'left',
+      imageSrc: '/panel2.jpg', 
+    },
+    {
+      backgroundColor: '#2ecc71',
+      title: 'Pagos a tesoreria',
+      buttonText: 'Ver más',
+      defaultTexts: [],
+      panelSize: { width: '500px', height: '250px' },
+      position: 'right',
+      imageSrc: '/panel3.jpg', 
+    },
+    {
+      backgroundColor: '#5b5b5b',
+      title: 'Correo Institucional',
+      buttonText: 'Ver más',
+      defaultTexts: [],
+      panelSize: { width: '500px', height: '250px' },
+      position: 'left',
+      imageSrc: '/panel4.jpg', 
+    },
+    {
+      backgroundColor: '#cdd6dc',
+      title: 'Mesa de partes virtual',
+      buttonText: 'Ver más',
+      defaultTexts: [],
+      panelSize: { width: '500px', height: '250px' },
+      position: 'right',
+      imageSrc: '/panel5.jpg', 
+    },
+  ].map((panel, index) => (
+    <div key={index}>
+      {createPanel(
+        panel.backgroundColor,
+        panel.title,
+        panel.buttonText,
+        panel.position,
+        panel.defaultTexts,
+        panel.panelSize,
+        panel.imageSrc
+      )}
+    </div>
+  ))}
+</SubSection>
+      </Article>
+
+      <SubSection subtitle={'Mandanos tu consulta'} resume={''}></SubSection>
+      {/* Paneles */}
+      {[
+        {
+          backgroundColor: '#1c9d4e',
+          title: 'REGISTRO',
+          buttonText: 'ENVIAR',
+          defaultTexts: [
+            <Talker>NOMBRE</Talker>,
+            <Talker>APELLIDOS</Talker>,
+            <Talker>EMAIL</Talker>,
+            <Talker>DNI</Talker>,
+            <Talker>CARRERA</Talker>,
+            <Talker>CONSULTA</Talker>,
+          ],
+          panelSize: { width: '1000px', height: '400px' },
+          position: 'right',
+        },
+      ].map((panel, index) => (
+        <div key={index}>
+          {createPanel(
+            panel.backgroundColor,
+            panel.title,
+            panel.buttonText,
+            panel.position,
+            panel.defaultTexts,
+            panel.panelSize
+          )}
+        </div>
+      ))}
+
+      <SubSection subtitle={'Noticias UNCP'} resume={''}>
+        {/* Contenedor de los paneles */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          {[
+            {
+              backgroundColor: '#95a5a6', 
+              title: '10500 ESTUDIANTES INSCRITOS PARA XIIIFERIA DE ORIENTACIÓN VOCACIONAL DE LA UNCP',
+              buttonText: 'Leer noticia completa',
+              defaultTexts: [],
+              panelSize: { width: '200px', height: '300px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#95a5a6', 
+              title: 'UNCP Y GOBIERNO REGIONAL DE JUNÍN SUSCRIBIERON ALIANZA',
+              buttonText: 'Leer noticia completa',
+              defaultTexts: [],
+              panelSize: { width: '200px', height: '300px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#95a5a6', 
+              title: 'PODCAST UNCP:“TRADICIONES EN AUDIO”',
+              buttonText: 'Leer noticia completa',
+              defaultTexts: [],
+              panelSize: { width: '200px', height: '300px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#95a5a6', 
+              title: 'UNCP Y GOBIERNO REGIONAL DE JUNÍN SUSCRIBIERON ALIANZA',
+              buttonText: 'Leer noticia completa',
+              defaultTexts: [],
+              panelSize: { width: '200px', height: '300px' },
+              position: 'right',
+            },
+          ].map((panel, index) => (
+            <div key={index}>
+              {createPanel(
+                panel.backgroundColor,
+                panel.title,
+                panel.buttonText,
+                panel.position,
+                panel.defaultTexts,
+                panel.panelSize
+              )}
+            </div>
+          ))}
+        </div>
+      </SubSection>
+
+      <SubSection subtitle={'Conocenos más'} resume={''}>
+        {/* Contenedor de los paneles */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+          {[
+            {
+              backgroundColor: '#9b59b6', 
+              title: 'CARRERAS PROFESIONALES',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#27ae60', 
+              title: 'BOLSA LABORAL UNCP',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#e74c3c', 
+              title: 'INVESTIGACION”',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#f39c12', 
+              title: 'ADMISION UNCP',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#95a5a6', 
+              title: 'LOGISTICA-REGISTRO DE PROVEEDORES',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+            {
+              backgroundColor: '#e74c3c', 
+              title: 'INFORMACION',
+              buttonText: 'VER MÁS',
+              defaultTexts: [],
+              panelSize: { width: '400px', height: '150px' },
+              position: 'right',
+            },
+          ].map((panel, index) => (
+            <div key={index}>
+              {createPanel(
+                panel.backgroundColor,
+                panel.title,
+                panel.buttonText,
+                panel.position,
+                panel.defaultTexts,
+                panel.panelSize
+              )}
+            </div>
+          ))}
+        </div>
+      </SubSection>
+    </>
+  );
+}

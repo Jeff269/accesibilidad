@@ -14,6 +14,7 @@ function Talker({children}) {
   function talk(texto){
     const utterThis = new SpeechSynthesisUtterance(texto);
     utterThis.lang = "es-ES";
+    utterThis.rate = 1.0;
     synth.speak(utterThis);
   }
   
@@ -23,13 +24,10 @@ function Talker({children}) {
         e.preventDefault();
         talk(e.target.textContent)
       }}
-
       onMouseOut={(e)=>{
         e.preventDefault();
         synth.cancel();
       }}
-
-
     >
       {children}
     </span>
